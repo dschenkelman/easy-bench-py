@@ -61,7 +61,7 @@ for name, res in results.viewitems():
   handle, = plt.plot(xs, ys, label=name)
   handles.append(handle)
 
-plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
-           ncol=2, mode="expand", borderaxespad=0., handles=handles)
+plt.legend(handles, bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+           ncol=2, mode="expand", borderaxespad=0.)
 
 plt.savefig(config["output"])
