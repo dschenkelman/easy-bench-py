@@ -1,0 +1,17 @@
+output: "result.png"
+n: 4
+c_steps:
+  - 1
+  - 2
+repetitions: 3
+benchmarks:
+  - name: "Available pets"
+    parts:
+      - "-H"
+      - "content-type: application/json"
+      - "http://petstore.swagger.io:80/v2/pet/findByStatus?status=available"
+  - name: "Pets with tag=tag1"
+    parts:
+      - "-H"
+      - "content-type: application/json"
+      - "http://petstore.swagger.io:80/v2/pet/findByTags?tags=tag1"
