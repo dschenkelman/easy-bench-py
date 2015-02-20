@@ -4,6 +4,7 @@ from subprocess import check_output
 from re import compile
 from sys import stderr
 import matplotlib.pyplot as plt
+from distutils.spawn import find_executable
 
 failed_request_regex = compile("Failed requests:\s*[1-9][0-9]*$")
 
@@ -14,6 +15,8 @@ time_per_request_regex = compile("^Time per request:\s*([0-9]*\.[0-9]*)\s*\[ms\]
 results = {}
 errors = []
 
+ab_path = find_executable('ab')
+
 def print_error(*objs):
   print("ERROR: ", *objs, file=stderr)
 
@@ -23,7 +26,7 @@ with open("config.yaml", 'r') as stream:
   for benchmark in config["benchmarks"]:
     benchmark_results = {}
     for c in config["c_steps"]:
-      arguments = ["/usr/sbin/ab", "-n", str(config["n"]), "-c", str(c)]
+      arguments = [ab_path, "-n", str(config["n"]), "-c", str(c)]
       arguments += benchmark["parts"]
       for r in range(config["repetitions"]):
         output = check_output(arguments)
